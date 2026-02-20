@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Group name (optional) — Wrapped</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #08080e;
+  --bg2: #0f0f1a;
+  --bg3: #13131f;
+  --green: #c8ff57;
+  --red: #ff5757;
+  --blue: #57c8ff;
+  --pink: #ff57c8;
+  --text: #e8e8f0;
+  --dim: #888;
+  --border: rgba(200,255,87,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;line-height:1.6;}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:4rem 2rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 60%,rgba(200,255,87,.07) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 80% 30%,rgba(87,200,255,.06) 0%,transparent 70%),radial-gradient(ellipse 50% 50% at 50% 100%,rgba(255,87,200,.05) 0%,transparent 70%);pointer-events:none;}
+.eyebrow{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.25em;color:var(--green);text-transform:uppercase;margin-bottom:1.5rem;opacity:.8;}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,18vw,16rem);line-height:.85;letter-spacing:-.02em;}
+.hero h1 .opt{color:var(--green);}
+.hero-sub{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.15em;color:var(--dim);margin-top:2rem;text-transform:uppercase;}
+.members{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;justify-content:center;}
+.chip{background:rgba(200,255,87,.08);border:1px solid var(--border);border-radius:999px;padding:.4rem 1.2rem;font-size:.85rem;font-weight:500;}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;width:100%;max-width:900px;margin-top:5rem;background:var(--border);border:1px solid var(--border);border-radius:1rem;overflow:hidden;}
+.hs{background:var(--bg2);padding:2rem 1.5rem;text-align:center;}
+.hs-n{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);color:var(--green);line-height:1;}
+.hs-l{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-top:.3rem;}
+.scroll-hint{position:absolute;bottom:2rem;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;animation:bob 2s infinite;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+/* ── TICKER ── */
+.ticker{background:var(--green);overflow:hidden;padding:.75rem 0;white-space:nowrap;}
+.t-inner{display:inline-block;animation:tick 35s linear infinite;}
+.t-item{display:inline-block;color:var(--bg);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.1em;padding:0 2.5rem;}
+.t-item::after{content:'◆';margin-left:2.5rem;opacity:.4;}
+@keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ── SHARED ── */
+section{padding:6rem 2rem;max-width:1100px;margin:0 auto;}
+.lbl{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.25em;color:var(--green);text-transform:uppercase;margin-bottom:.8rem;opacity:.8;}
+.stitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,6rem);line-height:.9;letter-spacing:-.01em;margin-bottom:3rem;}
+.fb{max-width:none;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 2rem;}
+.fbi{max-width:1100px;margin:0 auto;}
+hr{border:none;border-top:1px solid var(--border);}
+
+/* ── WILD NUMBERS ── */
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:1rem;overflow:hidden;}
+.wcard{background:var(--bg);padding:2.5rem 2rem;position:relative;overflow:hidden;}
+.wcard::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--green);}
+.wcard.r::before{background:var(--red);}
+.wcard.b::before{background:var(--blue);}
+.wcard.p::before{background:var(--pink);}
+.wnum{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,7vw,6rem);color:var(--green);line-height:1;margin-bottom:.4rem;}
+.wcard.r .wnum{color:var(--red);}
+.wcard.b .wnum{color:var(--blue);}
+.wcard.p .wnum{color:var(--pink);}
+.wdesc{font-size:.88rem;color:var(--dim);line-height:1.55;}
+.wdesc strong{color:var(--text);}
+
+/* ── GORILLA ── */
+.gorilla{padding:6rem 2rem;text-align:center;position:relative;overflow:hidden;}
+.gorilla::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(200,255,87,.05) 0%,transparent 70%);}
+.glbl{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.25em;color:var(--green);text-transform:uppercase;margin-bottom:1.5rem;}
+.gq{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,10vw,9rem);line-height:.9;max-width:1000px;margin:0 auto 1.5rem;}
+.gq span{color:var(--green);}
+.gsub{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.15em;color:var(--dim);text-transform:uppercase;margin-bottom:1rem;}
+.gctx{font-size:.85rem;color:var(--dim);max-width:520px;margin:0 auto;}
+
+/* ── QUOTES ── */
+.qstack{display:flex;flex-direction:column;gap:2rem;}
+.qb{border-left:3px solid var(--green);padding:1.5rem 2rem;background:var(--bg2);border-radius:0 .75rem .75rem 0;position:relative;}
+.qb.r{border-color:var(--red);}
+.qb.b{border-color:var(--blue);}
+.qb.p{border-color:var(--pink);}
+.qt{font-size:clamp(1rem,2.5vw,1.45rem);font-style:italic;line-height:1.5;margin-bottom:.8rem;}
+.qw{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.12em;color:var(--green);text-transform:uppercase;}
+.qb.r .qw{color:var(--red);}
+.qb.b .qw{color:var(--blue);}
+.qb.p .qw{color:var(--pink);}
+.qb.pinned::after{content:'📌 PINNED';position:absolute;top:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;color:var(--green);background:rgba(200,255,87,.1);padding:.2rem .5rem;border-radius:999px;}
+
+/* ── OUTINGS ── */
+.olist{display:flex;flex-direction:column;gap:0;}
+.orow{display:grid;grid-template-columns:110px 1fr;border-bottom:1px solid var(--border);padding:2rem 0;}
+.orow:first-child{padding-top:0;}
+.onum{font-family:'Bebas Neue',sans-serif;font-size:4rem;color:rgba(200,255,87,.15);line-height:1;}
+.odate{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;color:var(--green);text-transform:uppercase;margin-bottom:.4rem;}
+.otitle{font-size:1.2rem;font-weight:700;margin-bottom:.5rem;}
+.odesc{font-size:.88rem;color:var(--dim);line-height:1.6;}
+.tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem;}
+.tag{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.08em;padding:.2rem .6rem;border-radius:999px;border:1px solid var(--border);color:var(--dim);text-transform:uppercase;}
+.tag.g{border-color:rgba(200,255,87,.3);color:var(--green);background:rgba(200,255,87,.06);}
+.tag.r{border-color:rgba(255,87,87,.3);color:var(--red);}
+
+/* ── PROFILES ── */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.5rem;}
+.pc{background:var(--bg2);border:1px solid var(--border);border-radius:1rem;padding:2rem 1.5rem;position:relative;overflow:hidden;}
+.pc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--green);}
+.pc:nth-child(2)::after{background:var(--red);}
+.pc:nth-child(3)::after{background:var(--blue);}
+.pc:nth-child(4)::after{background:var(--pink);}
+.pe{font-size:2.5rem;margin-bottom:.8rem;}
+.pn{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.02em;margin-bottom:.3rem;}
+.pr{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;color:var(--green);text-transform:uppercase;margin-bottom:1rem;}
+.pc:nth-child(2) .pr{color:var(--red);}
+.pc:nth-child(3) .pr{color:var(--blue);}
+.pc:nth-child(4) .pr{color:var(--pink);}
+.pb{font-size:.84rem;color:var(--dim);line-height:1.6;margin-bottom:1.2rem;}
+.pq{font-style:italic;font-size:.8rem;border-top:1px solid var(--border);padding-top:1rem;color:var(--text);line-height:1.5;}
+.psg{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1rem;}
+.ps{text-align:center;background:var(--bg3);border-radius:.5rem;padding:.6rem .4rem;}
+.psn{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--green);}
+.pc:nth-child(2) .psn{color:var(--red);}
+.pc:nth-child(3) .psn{color:var(--blue);}
+.pc:nth-child(4) .psn{color:var(--pink);}
+.psl{font-size:.58rem;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);}
+
+/* ── INCIDENTS ── */
+.ilist{display:flex;flex-direction:column;gap:1.8rem;}
+.inc{display:grid;grid-template-columns:70px 1fr;gap:1.5rem;align-items:start;}
+.iico{width:56px;height:56px;background:var(--bg3);border:1px solid var(--border);border-radius:.75rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.imeta{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--green);text-transform:uppercase;margin-bottom:.3rem;}
+.ititle{font-weight:700;font-size:1.05rem;margin-bottom:.4rem;}
+.idesc{font-size:.87rem;color:var(--dim);line-height:1.6;}
+.idesc em{font-style:italic;color:var(--text);}
+
+/* ── AWARDS ── */
+.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.5rem;}
+.ac{background:var(--bg2);border:1px solid var(--border);border-radius:1rem;padding:1.8rem 1.5rem;text-align:center;}
+.ae{font-size:2.5rem;margin-bottom:.8rem;}
+.at{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;color:var(--dim);text-transform:uppercase;margin-bottom:.5rem;}
+.aw{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.02em;color:var(--green);margin-bottom:.5rem;}
+.ar{font-size:.8rem;color:var(--dim);line-height:1.5;}
+
+/* ── SITUATIONSHIPS ── */
+.slist{display:flex;flex-direction:column;gap:1.5rem;}
+.sitch{background:var(--bg2);border:1px solid var(--border);border-radius:1rem;padding:1.5rem 2rem;display:grid;grid-template-columns:auto 1fr auto;gap:1.5rem;align-items:center;}
+.semi{font-size:2rem;}
+.sn{font-weight:700;font-size:1.05rem;margin-bottom:.3rem;}
+.sd{font-size:.85rem;color:var(--dim);}
+.sst{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .7rem;border-radius:999px;white-space:nowrap;}
+.sst.ok{background:rgba(200,255,87,.1);color:var(--green);border:1px solid rgba(200,255,87,.3);}
+.sst.ch{background:rgba(255,87,87,.1);color:var(--red);border:1px solid rgba(255,87,87,.3);}
+.sst.pen{background:rgba(87,200,255,.1);color:var(--blue);border:1px solid rgba(87,200,255,.3);}
+
+/* ── OUTRO ── */
+.outro{padding:8rem 2rem;text-align:center;position:relative;overflow:hidden;}
+.outro::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(200,255,87,.06) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(255,87,200,.05) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 80% 20%,rgba(87,200,255,.05) 0%,transparent 70%);pointer-events:none;}
+.outro h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,8rem);line-height:.9;margin-bottom:3rem;}
+.outro h2 span{color:var(--green);}
+.outro p{font-size:clamp(.95rem,2.5vw,1.25rem);color:var(--dim);max-width:700px;margin:0 auto 1.5rem;line-height:1.75;}
+.outro p strong{color:var(--text);}
+.outro-sig{font-size:clamp(1.2rem,3vw,1.8rem);font-weight:700;color:var(--text);font-style:italic;margin-top:3rem;}
+.outro-foot{margin-top:4rem;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;color:rgba(136,136,136,.35);text-transform:uppercase;}
+
+@media(max-width:700px){
+  .hero-stats{grid-template-columns:repeat(2,1fr);}
+  .sitch{grid-template-columns:auto 1fr;}
+  .sst{grid-column:1/-1;justify-self:start;}
+  .orow{grid-template-columns:70px 1fr;}
+  .inc{grid-template-columns:56px 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="eyebrow">Dec 30, 2025 — Feb 19, 2026</p>
+  <h1>GROUP<br>NAME<br><span class="opt">(optional)</span></h1>
+  <p class="hero-sub">51 days · 4 degenerates · no going back</p>
+  <div class="members">
+    <span class="chip">Charlie 🏚️</span>
+    <span class="chip">Josephy 🦍</span>
+    <span class="chip">Matilda 🐱</span>
+    <span class="chip">Ruby-louise 💞✞</span>
+  </div>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-n">~5,800</div><div class="hs-l">Messages</div></div>
+    <div class="hs"><div class="hs-n">10+</div><div class="hs-l">Outings</div></div>
+    <div class="hs"><div class="hs-n">4</div><div class="hs-l">Degenerates</div></div>
+    <div class="hs"><div class="hs-n">51</div><div class="hs-l">Days</div></div>
+  </div>
+  <p class="scroll-hint">↓ &nbsp; scroll &nbsp; ↓</p>
+</section>
+
+<hr>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="t-inner">
+    <span class="t-item">charlie aint got no house</span>
+    <span class="t-item">gorilla sofa with hands and toes</span>
+    <span class="t-item">fuuuuck i'm bouta nuuuuut</span>
+    <span class="t-item">swedish ptsd</span>
+    <span class="t-item">charity work</span>
+    <span class="t-item">lloyd is in my bed</span>
+    <span class="t-item">doccy p is life</span>
+    <span class="t-item">im as chill as antarctica</span>
+    <span class="t-item">charlie aint got no house</span>
+    <span class="t-item">gorilla sofa with hands and toes</span>
+    <span class="t-item">fuuuuck i'm bouta nuuuuut</span>
+    <span class="t-item">swedish ptsd</span>
+    <span class="t-item">charity work</span>
+    <span class="t-item">lloyd is in my bed</span>
+    <span class="t-item">doccy p is life</span>
+    <span class="t-item">im as chill as antarctica</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- WILD NUMBERS -->
+<section>
+  <p class="lbl">The Data</p>
+  <h2 class="stitle">Wild<br>Numbers</h2>
+  <div class="wgrid">
+
+    <div class="wcard">
+      <div class="wnum">60+</div>
+      <div class="wdesc">Media files <strong>Josephy sent in the first 8 minutes</strong> the group existed. No context. He also deleted one. Matilda said "what". Charlie said ".".</div>
+    </div>
+
+    <div class="wcard r">
+      <div class="wnum">4.5L</div>
+      <div class="wdesc">Of <strong>Dr Pepper (Doccy P)</strong> Joseph drank in a single day. 7 bottomless refills at a restaurant plus 3 cans. He got the shakes. He thought he was high. He wasn't.</div>
+    </div>
+
+    <div class="wcard b">
+      <div class="wnum">86K</div>
+      <div class="wdesc">Views on <strong>Ruby's eyebrow TikTok.</strong> "People reposted it, it's relatable." Her most viewed video is about eyebrows. This is fine.</div>
+    </div>
+
+    <div class="wcard p">
+      <div class="wnum">10/80</div>
+      <div class="wdesc">Joseph's maths test score. The next lowest was 20. His teacher said in front of the class: <strong>"Looking at you, Joseph."</strong> Everyone laughed. Ruby called the teacher fat.</div>
+    </div>
+
+    <div class="wcard b">
+      <div class="wnum">4/4</div>
+      <div class="wdesc">Members of this group who are <strong>bi.</strong> That's all of them. This came out in one conversation. Nobody was even that surprised.</div>
+    </div>
+
+    <div class="wcard">
+      <div class="wnum">56</div>
+      <div class="wdesc">TikTok drafts Matilda discovered she had. Including <strong>a Joseph and Charlie appreciation video</strong> where she forgot what the first slide said.</div>
+    </div>
+
+    <div class="wcard r">
+      <div class="wnum">1 wk</div>
+      <div class="wdesc">How long <strong>both of Matilda's parents independently bet</strong> her relationship with Lloyd would last. Her dad also noted: <em>"you won't want kids with him, they're gonna be short and blind."</em></div>
+    </div>
+
+    <div class="wcard p">
+      <div class="wnum">~3K</div>
+      <div class="wdesc">Views on <strong>the group's first TikTok post</strong> ever — not even a video of themselves. This was before the 86K eyebrow era. The algorithm giveth.</div>
+    </div>
+
+    <div class="wcard">
+      <div class="wnum">9</div>
+      <div class="wdesc">RE exam paragraphs Joseph had to write the night they were assigned, with <strong>zero notice, after an hour of maths tutoring,</strong> while hungry, tired, and developing a headache. He survived.</div>
+    </div>
+
+  </div>
+</section>
+
+<hr>
+
+<!-- GORILLA SOFA -->
+<div class="fb gorilla">
+  <p class="glbl">📌 The Pinned Message — 09 Feb 2026, 08:13</p>
+  <div class="gq"><span>Gorilla</span> Sofa<br>With <span>Hands</span><br>And <span>Toes</span></div>
+  <p class="gsub">— Josephy, sent from a car stuck in traffic</p>
+  <p class="gctx">Charlie had just said "I made it in 2 seconds by car." Joseph replied with this. Unprompted. He then said "Best quote ever. Pin it." Charlie pinned it immediately. It remains pinned. It has never been explained. It never will be.</p>
+</div>
+
+<hr>
+
+<!-- QUOTES -->
+<section>
+  <p class="lbl">Hall of Records</p>
+  <h2 class="stitle">The<br>Quotes</h2>
+  <div class="qstack">
+
+    <div class="qb">
+      <div class="qt">"charlie aint got no house. you aint. you got the streets."</div>
+      <div class="qw">Matilda — 30/12/2025, within the first 12 minutes of the group existing</div>
+    </div>
+
+    <div class="qb r">
+      <div class="qt">"Fuuuuck I'm bouta NUUUUUT. Sorry guys."</div>
+      <div class="qw">Josephy — reacting to a childhood photo of Matilda. Matilda said "stop". He said "sorry".</div>
+    </div>
+
+    <div class="qb b">
+      <div class="qt">"I told lloyd I'm dating him as charity work." &nbsp;[accident]</div>
+      <div class="qw">Matilda — 17/02/2026. Charlie replied: "that is plausible." Matilda replied: "accident."</div>
+    </div>
+
+    <div class="qb p">
+      <div class="qt">"im as chill as Antarctica"</div>
+      <div class="qw">Ruby — during an argument with Joseph about Discord. She was not particularly chill at that moment.</div>
+    </div>
+
+    <div class="qb">
+      <div class="qt">"I just had a rather fantastic and profound goon session. I believe I uncovered an element of myself that had gone unnoticed for years."</div>
+      <div class="qw">Josephy — unprompted, late evening. Ruby said: "that was rather tmi joseph." Joseph said there was more detail available if needed.</div>
+    </div>
+
+    <div class="qb r">
+      <div class="qt">"Matilda, are you genuinely the most deeply fucking retarded being to ever walk the face of this god forsaken planet"</div>
+      <div class="qw">Josephy — after Matilda asked if rubbers are made from rubber.</div>
+    </div>
+
+    <div class="qb b">
+      <div class="qt">"Within the last hour I've read 20 pages of my book, played piano, eaten three cupcakes, watched TikTok and cried a bit."</div>
+      <div class="qw">Ruby — describing what "being bored for no reason" looks like. Standard Thursday.</div>
+    </div>
+
+    <div class="qb p">
+      <div class="qt">"Swedish ptsd"</div>
+      <div class="qw">Charlie — upon learning the first outing destination was IKEA. Ruby replied: "Leon won't get you, it's fine."</div>
+    </div>
+
+    <div class="qb">
+      <div class="qt">"I goon to gay furry porn but this is gunna be at the bottom so no one will know"</div>
+      <div class="qw">Josephy — it was not at the bottom. Charlie forwarded it immediately and preserved it forever.</div>
+    </div>
+
+    <div class="qb r">
+      <div class="qt">"My life goals: 1. be pegged  2. get a footjob  3. get high in a scenic asf place  4. find peace  5. get pegged"</div>
+      <div class="qw">Josephy — voluntarily. Ruby: "weird goals." Joseph: "The pegging is definitely valid."</div>
+    </div>
+
+    <div class="qb b">
+      <div class="qt">"WHERED MY PANTS GO"</div>
+      <div class="qw">Charlie — at school. Context unknown. Preserved for posterity by Josephy alongside: "Tomorrow, second break, I'm going to body slam you through a table."</div>
+    </div>
+
+    <div class="qb p">
+      <div class="qt">"I woke up and swallowed and my throat feels like I ate cheese graters."</div>
+      <div class="qw">Josephy — Valentine's Day morning. He cancelled on Isabelle, then ate one of her mini egg bags, had a shower, and felt much better.</div>
+    </div>
+
+    <div class="qb">
+      <div class="qt">"hor."</div>
+      <div class="qw">Matilda — directed at Charlie. She then clarified she was "laughing. at hor." for no particular reason.</div>
+    </div>
+
+    <div class="qb r">
+      <div class="qt">"I didn't wear any makeup today and I felt naked."</div>
+      <div class="qw">Ruby — justifying why she needed time to get ready before the IKEA outing. Night one of the group.</div>
+    </div>
+
+    <div class="qb b">
+      <div class="qt">"I read an email I sent myself a year ago asking if I was still alive."</div>
+      <div class="qw">Josephy — discovering his futureme.org inbox. There was also one asking if he'd got with the girl he liked. And one reminding him to water his plants.</div>
+    </div>
+
+    <div class="qb p">
+      <div class="qt">"Thank you for making me feel valued. I'm not sure if I'd be here if it wasn't for people like you."</div>
+      <div class="qw">Josephy — out of nowhere one night. The whole group went quiet. Then said everything back to him.</div>
+    </div>
+
+    <div class="qb">
+      <div class="qt">"You're genuinely like an older brother to me and I don't think I'd ever be able to achieve such a great bond like this with anyone else."</div>
+      <div class="qw">Ruby — to Joseph, after a hard night. It was real.</div>
+    </div>
+
+    <div class="qb r">
+      <div class="qt">"I just want to say thank you guys for inviting us all out like as a group. Without this group I'd probably be inside all the time."</div>
+      <div class="qw">Matilda — before a town outing. Meant completely sincerely.</div>
+    </div>
+
+    <div class="qb b pinned">
+      <div class="qt">"Gorilla sofa with hands and toes"</div>
+      <div class="qw">Josephy — 09/02/2026, 08:13. Currently pinned in this group chat. Sent from a car in traffic. Never explained.</div>
+    </div>
+
+    <div class="qb p">
+      <div class="qt">"lloyd is in my bed"</div>
+      <div class="qw">Matilda — 19/02/2026, 14:47. The last major message of the wrapped period. Joseph's reply: "who".</div>
+    </div>
+
+  </div>
+</section>
+
+<hr>
+
+<!-- OUTINGS -->
+<section>
+  <p class="lbl">The Field Log</p>
+  <h2 class="stitle">Every<br>Outing</h2>
+  <div class="olist">
+
+    <div class="orow">
+      <div class="onum">01</div>
+      <div>
+        <div class="odate">31 Dec 2025 — New Year's Eve</div>
+        <div class="otitle">Town + IKEA (The Origin Story)</div>
+        <div class="odesc">The group was created at 11pm the night before and immediately became an outing planning operation. Ruby walked to Matilda's in the rain because it was a sleepover. They went to IKEA and then wandered into town. Charlie "broke ritual" by not going to HMV — the first time ever. Matilda talked to a random woman in McDonald's and called it social interaction. Charlie announced that they should make 2026 "the most outings possible."</div>
+        <div class="tags">
+          <span class="tag g">First Ever</span>
+          <span class="tag">IKEA</span>
+          <span class="tag">McDonald's</span>
+          <span class="tag r">Swedish PTSD</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="orow">
+      <div class="onum">02</div>
+      <div>
+        <div class="odate">11 Jan 2026</div>
+        <div class="otitle">The Rec Walk (Paul Bäumer Era)</div>
+        <div class="odesc">Walked to the rec through rain. Ruby said she felt "like Paul Bäumer" (All Quiet on the Western Front). Matilda wore two jackets — one for fit, one for warmth. Joseph couldn't find a jumper that "fit the fit" and was overstimulated because his parents were fighting, his room was messy, and his jumper was pissing him off. They made it. They lived. Ruby's jeans got soggy.</div>
+        <div class="tags">
+          <span class="tag">Rec</span>
+          <span class="tag">Rain</span>
+          <span class="tag r">Soggy Jeans</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="orow">
+      <div class="onum">03</div>
+      <div>
+        <div class="odate">12 Jan 2026</div>
+        <div class="otitle">Charlie + Matilda Solo Mission</div>
+        <div class="odesc">Ruby had plans with Leon and couldn't come. Joseph felt like he was being abandoned (his words). Charlie texted "outing cuz rupes cant" and that was the full plan. Matilda had gone to bed at 4am and had to straighten her hair, so she was late. The outing happened anyway.</div>
+        <div class="tags">
+          <span class="tag">Partial Crew</span>
+          <span class="tag r">Ruby MIA</span>
+          <span class="tag r">Joseph Abandoned</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="orow">
+      <div class="onum">04</div>
+      <div>
+        <div class="odate">~23 Jan 2026 — The Illness Outing</div>
+        <div class="otitle">Thursday Outing (Biological Warfare)</div>
+        <div class="odesc">Joseph later named this the "illness outing." It rained. Within 48 hours the entire group was sick. Ruby: "knives lining my throat." Matilda: "I can't finish my cough so I gag." Joseph's migraine was "edging him all day." Charlie's eyes were watering "like I'm crying for no reason." Joseph asked: "what was in the rain?"</div>
+        <div class="tags">
+          <span class="tag g">Infamous</span>
+          <span class="tag r">Mass Illness</span>
+          <span class="tag r">All Infected</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="orow">
+      <div class="onum">05</div>
+      <div>
+        <div class="odate">~31 Jan 2026</div>
+        <div class="otitle">Town Outing (Digital Camera Debut)</div>
+        <div class="odesc">Ruby decided she'd start bringing the digital camera to every outing. Matilda arrived with £50 including £16 in actual loose coins. Joseph wore "the same trousers he's worn to every town outing pretty much." The group spent part of the outing researching how to build a tree hammock net in the woods using rope from Decathlon or Toolstation. Joseph's dad has a jet lighter. Plans were made. The net hasn't happened yet.</div>
+        <div class="tags">
+          <span class="tag g">Digital Camera Era Begins</span>
+          <span class="tag">Town</span>
+          <span class="tag">Urban Outfitters</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="orow">
+      <div class="onum">06</div>
+      <div>
+        <div class="odate">~4 Feb 2026</div>
+        <div class="otitle">"Best Outing In A While"</div>
+        <div class="odesc">Joseph sent "best outing in a while" to the photo group with zero additional context. Everyone was told to send outing photos. Charlie nearly left his hat at the rec. Whatever happened, the energy was right. This is the highest-rated outing of the wrapped period by peer review.</div>
+        <div class="tags">
+          <span class="tag g">Highest Rated</span>
+          <span class="tag">Rec</span>
+          <span class="tag">Photo Group</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="orow">
+      <div class="onum">07</div>
+      <div>
+        <div class="odate">5 Feb 2026</div>
+        <div class="otitle">Ruby's House + Rec</div>
+        <div class="odesc">Ruby's house served as base. They went to the rec. Joseph was by the shortcut. Charlie had 5% earbuds and wasn't going to let that stop him. Standard operating procedure at this point — the rec is essentially a fifth member of this group.</div>
+        <div class="tags">
+          <span class="tag">Ruby's House</span>
+          <span class="tag">Rec</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="orow">
+      <div class="onum">08</div>
+      <div>
+        <div class="odate">6 Feb 2026</div>
+        <div class="otitle">Rec via Shortcut</div>
+        <div class="odesc">Charlie was already "by the shortcut to the rec." Joseph was somewhere en route. The shortcut is faster. The shortcut was taken. Evidence suggests this was its own separate outing rather than a continuation of the day before, but honestly the rec is visited so frequently that distinguishing between outing 7 and outing 8 requires forensic analysis.</div>
+        <div class="tags">
+          <span class="tag">Rec</span>
+          <span class="tag">Shortcut</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="orow">
+      <div class="onum">09</div>
+      <div>
+        <div class="odate">15 Feb 2026 (moved from the 14th)</div>
+        <div class="otitle">Valentine's Week Town Trip</div>
+        <div class="odesc">Supposed to be Valentine's Day but Joseph woke up with a throat like "cheese graters," cancelled on Isabelle, ate one of the two mini egg bags he'd bought for her, showered, and felt slightly better. Rescheduled to the 15th. Matilda had £50. Joseph dropped Isabelle's gift to her separately. Ruby gave Leon Vagabond Vol. 4 and Dumle chocolates (Joseph's expert recommendation). Urban Outfitters was visited. Everyone dressed up. The digital camera came out.</div>
+        <div class="tags">
+          <span class="tag g">Valentine's</span>
+          <span class="tag">Town</span>
+          <span class="tag">Urban Outfitters</span>
+          <span class="tag r">Joseph Ate The Mini Eggs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="orow">
+      <div class="onum">10</div>
+      <div>
+        <div class="odate">~16–17 Feb 2026</div>
+        <div class="otitle">Common or Rec (The Lloyd Era Begins)</div>
+        <div class="odesc">Joseph asked the group: "common or rec outing tomorrow?" They went. This coincided with Matilda's Lloyd situation becoming very real very quickly. Matilda took photos of Lloyd that her mum hadn't seen yet. Her mum still thought he had long hair. Joseph sent a photo from the outing that looked like he'd just witnessed something life-changing. Ruby brought the camera.</div>
+        <div class="tags">
+          <span class="tag">Common</span>
+          <span class="tag">Rec</span>
+          <span class="tag r">Lloyd Adjacent</span>
+          <span class="tag g">Digital Camera</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr>
+
+<!-- PROFILES -->
+<div class="fb">
+  <div class="fbi">
+    <p class="lbl">The Cast</p>
+    <h2 class="stitle">Four<br>People</h2>
+    <div class="pgrid">
+
+      <div class="pc">
+        <div class="pe">🏚️</div>
+        <div class="pn">Charlie</div>
+        <div class="pr">Founder · For The Streets</div>
+        <div class="pb">Created the group at 11pm on Dec 30. Called Joseph "Diddy blud" immediately. Has no house per Matilda (he has the streets). Codes at 2am in VS Code, accidentally walked into a drug deal in an alleyway, had his house gassed by his uncle, and cannot spell while voice-typing but keeps going. Is teaching his mum to play The Last of Us. His nan washes his bedding differently and it's clearing his skin up.</div>
+        <div class="pq">"If we try go for ridiculously early then thst means if there is a delay it don't matter."</div>
+        <div class="psg">
+          <div class="ps"><div class="psn">~1,800</div><div class="psl">Messages</div></div>
+          <div class="ps"><div class="psn">✓</div><div class="psl">Has Streets</div></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pe">🦍</div>
+        <div class="pn">Josephy</div>
+        <div class="pr">Main Character · Diddy Blud</div>
+        <div class="pb">Sent 60+ media files in the first 8 minutes. Drinks Doccy P like it has healing properties. Scored 10/80 on a maths test and was called out in front of the class. Got a parents evening where every teacher glazed him. Is learning to sing Infrunami. Has a cat called Biscuit who ate a chicken bone. Thought he was high from a Waitrose brownie. Changed Ruby's contact name to "Ruby Leon Lover" when she started dating Leon. Genuinely one of the most caring people in this group.</div>
+        <div class="pq">"I just had a rather fantastic and profound goon session. I believe I uncovered an element of myself that had gone unnoticed for years."</div>
+        <div class="psg">
+          <div class="ps"><div class="psn">~1,400</div><div class="psl">Messages</div></div>
+          <div class="ps"><div class="psn">4.5L</div><div class="psl">Doccy P/Day</div></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pe">🐱</div>
+        <div class="pn">Matilda</div>
+        <div class="pr">Chaotic Good · Wants A Cat</div>
+        <div class="pb">Her nan thinks she has cyclical vomiting syndrome. Her dad keeps her room-clean deal alive for a cat she hasn't got yet. Her mum called her an "ungrateful useless bitch" over cable tidies. She got a behaviour point for telling a teacher she'd punch him. Started dating Lloyd — the person she spent most of the chat saying hated her. Told Lloyd she was dating him as charity work. By accident.</div>
+        <div class="pq">"charlie aint got no house. you aint. you got the streets."</div>
+        <div class="psg">
+          <div class="ps"><div class="psn">~1,600</div><div class="psl">Messages</div></div>
+          <div class="ps"><div class="psn">0</div><div class="psl">Cats (yet)</div></div>
+        </div>
+      </div>
+
+      <div class="pc">
+        <div class="pe">💞</div>
+        <div class="pn">Ruby</div>
+        <div class="pr">Emotional Core · Leon's Girl</div>
+        <div class="pb">86K views on an eyebrow TikTok. Plays piano. Wrote a letter to her 18-year-old self then accidentally labelled herself "Brother Joe" in the group chat. Retired her nose ring. Horsified four people in Minecraft including Joseph. Cried from boredom then played Roblox. When someone was struggling, Ruby was there with something actually worth saying. The group is noticeably more grounded with her in it.</div>
+        <div class="pq">"Within the last hour I've read 20 pages of my book, played piano, eaten three cupcakes, watched TikTok and cried a bit."</div>
+        <div class="psg">
+          <div class="ps"><div class="psn">~1,000</div><div class="psl">Messages</div></div>
+          <div class="ps"><div class="psn">86K</div><div class="psl">Eyebrow Views</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- INCIDENTS -->
+<section>
+  <p class="lbl">The Lore</p>
+  <h2 class="stitle">Incident<br>Log</h2>
+  <div class="ilist">
+
+    <div class="inc">
+      <div class="iico">🌊</div>
+      <div>
+        <div class="imeta">30 Dec 2025 · 23:11</div>
+        <div class="ititle">The Opening Media Bomb</div>
+        <div class="idesc">Josephy sent <em>over sixty media files</em> in the first eight minutes of the group's existence. No explanation. He also deleted one of them mid-barrage. Matilda said "what". Charlie said ".". Ruby explained they were going to IKEA. Joseph sent more media.</div>
+      </div>
+    </div>
+
+    <div class="inc">
+      <div class="iico">🏚️</div>
+      <div>
+        <div class="imeta">30 Dec 2025 · Night One</div>
+        <div class="ititle">Charlie Loses His House</div>
+        <div class="idesc">Matilda told Charlie he didn't have a house within twelve minutes of the group being created. <em>"charlie aint got no house. you aint. you got the streets."</em> Joseph agreed: "Charlie's for the streets." Matilda also called him "hor" and then said she was "laughing at hor" for unexplained reasons. Charlie said "Pardon?" Matilda said "exactly that."</div>
+      </div>
+    </div>
+
+    <div class="inc">
+      <div class="iico">🧁</div>
+      <div>
+        <div class="imeta">Late Jan 2026</div>
+        <div class="ititle">The Weed Brownie That Was Just A Brownie</div>
+        <div class="idesc">Joseph ate half a Waitrose double chocolate brownie and became thoroughly convinced he was high. He sent morse code. He described bugs escaping from under his skin. He grabbed his dad's craft knife for protection. He said his brain felt like 🌊. It was the <em>four and a half litres of Dr Pepper</em> he'd consumed that day. He described the experience as "semi enjoyable."</div>
+      </div>
+    </div>
+
+    <div class="inc">
+      <div class="iico">📊</div>
+      <div>
+        <div class="imeta">Late Jan 2026</div>
+        <div class="ititle">The Maths Humiliation</div>
+        <div class="idesc">Joseph scored 10 out of 80. The next lowest in the class was 20. Miss Jones said in front of everyone: <em>"I'm mostly proud of everyone, most of you got 5–6s. Although some of us did pretty awfully. Looking at you, Joseph."</em> Ruby told her she was fat. Joseph said: "If I pass my GCSEs you all owe me £10 each." Charlie said he'd throw whatever change he had on him.</div>
+      </div>
+    </div>
+
+    <div class="inc">
+      <div class="iico">🌧️</div>
+      <div>
+        <div class="imeta">~23 Jan 2026</div>
+        <div class="ititle">The Illness Outing (Biological Event)</div>
+        <div class="idesc">A single outing in the rain managed to infect all four of them. Within 48 hours: Matilda couldn't finish her coughs and was gagging. Ruby's throat was lined with "knives." Joseph's migraine was "edging him all day." Charlie's eyes were watering for no reason. Joseph asked: <em>"what was in the rain?"</em> Nobody had an answer. They named it the Illness Outing officially.</div>
+      </div>
+    </div>
+
+    <div class="inc">
+      <div class="iico">💌</div>
+      <div>
+        <div class="imeta">Jan 2026</div>
+        <div class="ititle">The FutureMe Emails</div>
+        <div class="idesc">Joseph went through his emails and found messages he'd sent himself a year ago on futureme.org. One asked if he was still alive. One asked if he'd got with the girl he liked for ages. One reminded him to water his plants. He described the year it was sent as one of his <em>"bottom 3 times."</em> He then told the group they mean everything to him. It was one of those moments.</div>
+      </div>
+    </div>
+
+    <div class="inc">
+      <div class="iico">🎓</div>
+      <div>
+        <div class="imeta">Jan 2026</div>
+        <div class="ititle">The Greatest Parents Evening (Joseph Edition)</div>
+        <div class="idesc">A complete 180 from the maths debacle. Every teacher glazed Joseph at parents evening. Mr Teehan said he wrote <em>"one of the best paragraphs he's ever read."</em> His parents let him choose dinner and planned a reward. He shared this news as casually as possible. It was a genuinely good week for him.</div>
+      </div>
+    </div>
+
+    <div class="inc">
+      <div class="iico">🎸</div>
+      <div>
+        <div class="imeta">~Feb 2026</div>
+        <div class="ititle">The History Trip (Joseph Goes to London Alone)</div>
+        <div class="idesc">Joseph went on a history trip to the Natural History Museum in London. He described it as "boring" and "better than school." He spent the journey sending the group photos of Dr Barnes on Only Connect. He also noted he got to go with "Asian boy Luca," which Ruby found funny. He missed the group. He was back the same day.</div>
+      </div>
+    </div>
+
+    <div class="inc">
+      <div class="iico">💬</div>
+      <div>
+        <div class="imeta">9 Feb 2026 · 23:52</div>
+        <div class="ititle">The Official Quote Log</div>
+        <div class="idesc">Charlie compiled a list of quotes from an outing that evening. The entries were:<br><em>"I wish I was there" — Joseph.</em><br><em>"What is Hakim's brother's name" — Charlie.</em><br><em>"Gorilla sofa with hands and toes" — Joseph.</em><br>Joseph replied: "Best quote ever. Pin it." It was pinned. It is still pinned.</div>
+      </div>
+    </div>
+
+    <div class="inc">
+      <div class="iico">🏗️</div>
+      <div>
+        <div class="imeta">17 Feb 2026</div>
+        <div class="ititle">The Charity Work Incident</div>
+        <div class="idesc">Matilda told Lloyd she was dating him <em>as charity work.</em> She immediately followed this message with a single word: <em>"accident."</em> Charlie replied "that is plausible." Matilda was also simultaneously showing her mum a photo of Lloyd, whose hair her mum still thought was long. Her parents had bet one week. Her dad said the offspring would be short and blind.</div>
+      </div>
+    </div>
+
+    <div class="inc">
+      <div class="iico">🎵</div>
+      <div>
+        <div class="imeta">~Early Feb 2026</div>
+        <div class="ititle">MF DOOM Fist Bump</div>
+        <div class="idesc">Joseph was walking home and passed some cool guys playing <em>MF DOOM on a boombox.</em> One of them gave Joseph a fist bump specifically because of his chain and ring. Joseph reported this to the group immediately and with great pride. This is one of the better things that happened in this chat.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr>
+
+<!-- SITUATIONSHIPS -->
+<section>
+  <p class="lbl">The Drama Desk</p>
+  <h2 class="stitle">Love,<br>Actually</h2>
+  <div class="slist">
+
+    <div class="sitch">
+      <div class="semi">💞</div>
+      <div>
+        <div class="sn">Ruby + Leon</div>
+        <div class="sd">Leon is the reason this group chat exists — he got Ruby into Josephy's circle. Three weeks in and people were already complaining she'd "changed." Emile: "he didn't even like you." Ruby: "then why tf did he agree to date me and put effort into staying." Joseph updated her contact name from "Ruby Robin Lover" to "Ruby Leon Lover." She got him Vagabond Vol. 4 and Dumle chocolates for Valentine's. She wrote him a letter. He's clearly doing something right.</div>
+      </div>
+      <span class="sst ok">Official ✓</span>
+    </div>
+
+    <div class="sitch">
+      <div class="semi">🌀</div>
+      <div>
+        <div class="sn">Josephy + Isabelle (Huzz)</div>
+        <div class="sd">Liked her since October. Changed his mind every three days. She told him "I love you" while drunk. He didn't say it back because she might not mean it. She texted him the next day saying she was just drunk. He asked her to be his valentine by saying "I just wanted to ask if you wanted to be my valentine" — which he described as "pussying out." She said yes. He cancelled on Valentine's Day because of cheese grater throat. He ate her mini eggs. She forgave him. Still going.</div>
+      </div>
+      <span class="sst pen">Ongoing</span>
+    </div>
+
+    <div class="sitch">
+      <div class="semi">🏗️</div>
+      <div>
+        <div class="sn">Matilda + Lloyd</div>
+        <div class="sd">They hated each other for most of the chat. "He hates me." Ruby: "yet he's in a call with you." Matilda: "he aint got friends." By Feb 17 she was showing her mum photos of him. Her parents bet one week. Her dad said their kids would be short and blind. Then, on Feb 19: "lloyd is in my bed." Joseph replied "who". This is the last message of the wrapped period.</div>
+      </div>
+      <span class="sst ch">Chaos Mode</span>
+    </div>
+
+    <div class="sitch">
+      <div class="semi">🚏</div>
+      <div>
+        <div class="sn">Charlie + The Streets</div>
+        <div class="sd">As established on night one: Charlie aint got no house. He has the streets. He says he doesn't think anyone is "cool enough." He's slowly starting to like how he looks more each day. He's not rushing. He's got Minecraft and the coding and the nan's bedding clearing up his skin. He's fine out here.</div>
+      </div>
+      <span class="sst ok">Content ✓</span>
+    </div>
+
+  </div>
+</section>
+
+<hr>
+
+<!-- AWARDS -->
+<section>
+  <p class="lbl">The Honours</p>
+  <h2 class="stitle">End of<br>Season<br>Awards</h2>
+  <div class="agrid">
+
+    <div class="ac">
+      <div class="ae">🎭</div>
+      <div class="at">Main Character</div>
+      <div class="aw">Josephy</div>
+      <div class="ar">The weed brownie that wasn't. Life goals list. Morse code to friends. Gorilla sofa. 4.5L of Doccy P. Parents evening glazing. Maths humiliation. He wasn't trying to be the main character. He just is.</div>
+    </div>
+
+    <div class="ac">
+      <div class="ae">🔪</div>
+      <div class="at">Sharpest Roast</div>
+      <div class="aw">Matilda</div>
+      <div class="ar">"charlie aint got no house. you aint. you got the streets." On night one. Within twelve minutes. Without hesitation. This is her sport and she's elite at it.</div>
+    </div>
+
+    <div class="ac">
+      <div class="ae">📸</div>
+      <div class="at">Content Creator</div>
+      <div class="aw">Ruby</div>
+      <div class="ar">86K eyebrow TikTok. Joseph appreciation post. Digital camera to every outing. 56 drafts in Matilda's phone because Ruby gave her ideas. This is a career in the making.</div>
+    </div>
+
+    <div class="ac">
+      <div class="ae">💻</div>
+      <div class="at">Most Productive at 3am</div>
+      <div class="aw">Charlie</div>
+      <div class="ar">Coding in VS Code. Uploading Hakim to Google Drive for safekeeping. Planning tree hammock nets with full material breakdowns. Building Minecraft villages. Voice-texting in a way that no autocorrect can survive.</div>
+    </div>
+
+    <div class="ac">
+      <div class="ae">🩺</div>
+      <div class="at">Certified Hypochondriac</div>
+      <div class="aw">Matilda</div>
+      <div class="ar">Her nan diagnosed her with cyclical vomiting syndrome. She asked if she had a weiner (for clarification purposes). She thought she might have trench foot. A breathing moment felt like "an intestine ripped." She's probably fine.</div>
+    </div>
+
+    <div class="ac">
+      <div class="ae">🫀</div>
+      <div class="at">Emotional Backbone</div>
+      <div class="aw">Ruby</div>
+      <div class="ar">Every time someone was struggling, Ruby was there with something worth saying. And then she'd go cry to sad music alone afterwards. She's built different and she knows it.</div>
+    </div>
+
+    <div class="ac">
+      <div class="ae">🥤</div>
+      <div class="at">Doccy P Devotee</div>
+      <div class="aw">Josephy</div>
+      <div class="ar">4.5 litres. 7 bottomless refills. 3 additional cans. Got the shakes. Called it an overdose. Described Dr Pepper Zero as "not even my favourite, just the best one there." Got more cans the next day. "DOCCY P IS LIFE."</div>
+    </div>
+
+    <div class="ac">
+      <div class="ae">⏰</div>
+      <div class="at">Most Consistently Late</div>
+      <div class="aw">Matilda</div>
+      <div class="ar">"I might just walk slow" — upon realising she was already late. "Catchup is finny." Joseph: "you could make it if you really pushed." Matilda: "no." She had a system. The system was being late.</div>
+    </div>
+
+    <div class="ac">
+      <div class="ae">🎵</div>
+      <div class="at">Best Taste Overall</div>
+      <div class="aw">Everyone, Actually</div>
+      <div class="ar">Rimera. Clairo. Alex G. Jaydes. Kalyn Rain. Steve Lacy. Tyler the Creator. Dazey and the Scouts. And one MF DOOM boombox on the street that gave Joseph a fist bump he'll remember forever.</div>
+    </div>
+
+  </div>
+</section>
+
+<hr>
+
+<!-- OUTRO -->
+<div class="fb outro">
+  <p class="eyebrow">// the end</p>
+  <h2>THIS CHAT<br>CHANGED<br>MY <span>LIFE</span></h2>
+  <p>
+    Fifty-one days. Ten outings. One illness that took everyone down. One pinned message about a gorilla and a sofa that makes no sense. One Dr Pepper incident. One "weed brownie" that was just a brownie. One behaviour point for threatening a teacher. One charity work accident. One group of people who somehow make everything better.
+  </p>
+  <p>
+    But also: the 3am conversations when someone needed them. The FutureMe email asking if you're still alive. The parents evening defeats and the sudden glazing. The rec walks in the rain. The cheese grater Valentine's Day. The all-nighters and the soggy jeans and the two-jacket outings. The moments where someone says <strong>"you guys mean the world to me"</strong> and everyone already knew.
+  </p>
+  <p>
+    <strong>Charlie</strong> — no house, all heart. Builder of Minecraft villages, coder at 3am, guardian of the photo evidence. You have the streets and somehow that's enough.
+  </p>
+  <p>
+    <strong>Josephy</strong> — gorilla sofa, Doccy P, and the realest feelings in the room. You are an older brother, a main character, and proof that sometimes 10/80 is just a Tuesday.
+  </p>
+  <p>
+    <strong>Matilda</strong> — the sharpest tongue and the softest heart. The cat is coming. Keep the room clean. And maybe stop telling people they're charity work.
+  </p>
+  <p>
+    <strong>Ruby</strong> — 86K eyebrow views and the camera and the letter to your future self. You are the reason this group feels like a group and not just a chat.
+  </p>
+  <p class="outro-sig">This chat changed my life. I love you all. 💞</p>
+  <div class="outro-foot">Group name (optional) · Wrapped · Dec 30, 2025 — Feb 19, 2026</div>
+</div>
+
+</body>
+</html>
